@@ -80,10 +80,11 @@ kotlin {
         val desktopMain by getting
         
         androidMain.dependencies {
-            implementation(compose.preview)
-            implementation(libs.androidx.activity.compose)
-
+            implementation(compose.uiTooling)
+            implementation(libs.androidx.activityCompose)
+            implementation(libs.kotlinx.coroutines.android)
             implementation(libs.ktor.client.okhttp)
+//            implementation(libs.sqlDelight.driver.android)
             implementation(project.dependencies.platform("io.insert-koin:koin-bom:3.5.4"))
             implementation("io.insert-koin:koin-core")
             implementation("io.insert-koin:koin-android")
@@ -105,7 +106,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-
+            implementation(libs.moko.mvvm)
             implementation(compose.material3)
             implementation(compose.materialIconsExtended)
             implementation(libs.voyager.navigator)
@@ -118,6 +119,10 @@ kotlin {
             implementation(libs.screen.size)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.datetime)
+            implementation(libs.composeImageLoader)
+            implementation(libs.kamel.image)
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
             implementation(project.dependencies.platform("io.insert-koin:koin-bom:3.5.4"))
             implementation("io.insert-koin:koin-core")
             implementation("io.insert-koin:koin-compose")
