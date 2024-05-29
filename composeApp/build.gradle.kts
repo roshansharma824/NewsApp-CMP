@@ -70,6 +70,13 @@ kotlin {
     }
     
     sourceSets {
+
+        all {
+            languageSettings {
+                optIn("org.jetbrains.compose.resources.ExperimentalResourceApi")
+            }
+        }
+
         val desktopMain by getting
         
         androidMain.dependencies {
@@ -87,7 +94,7 @@ kotlin {
             implementation(kotlin("test"))
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.uiTest)
-//            implementation(libs.kotlinx.coroutines.test)
+            implementation(libs.kotlinx.coroutines.test)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -122,7 +129,7 @@ kotlin {
         }
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
-//            implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.ktor.client.okhttp)
 //            implementation(libs.sqlDelight.driver.sqlite)
         }
