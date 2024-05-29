@@ -89,6 +89,8 @@ kotlin {
             implementation("io.insert-koin:koin-android")
             implementation("io.insert-koin:koin-annotations:1.3.1")
             implementation("androidx.core:core-splashscreen:1.0.1")
+            // System UI Controller - Accompanist
+            implementation("com.google.accompanist:accompanist-systemuicontroller:0.21.2-beta")
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
@@ -182,14 +184,6 @@ android {
     dependencies {
         debugImplementation(compose.uiTooling)
     }
-}
-dependencies {
-
-    //    implementation(libs.androidx.ui.test.android)
-//    implementation(libs.androidx.ui.test.desktop)
-//    implementation(libs.androidx.ui.test.junit4.android)
-//    implementation(libs.androidx.ui.test.junit4.desktop)
-//    testImplementation("org.testng:testng:6.9.6")
 }
 
 compose.desktop {

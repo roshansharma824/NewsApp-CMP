@@ -1,5 +1,6 @@
 package theme
 
+import Utils.PlatformColors
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -8,6 +9,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -261,13 +263,25 @@ internal val LocalThemeIsDark = compositionLocalOf { mutableStateOf(true) }
 internal fun AppTheme(
     content: @Composable() () -> Unit
 ) {
+
     val systemIsDark = isSystemInDarkTheme()
     val isDarkState = remember { mutableStateOf(systemIsDark) }
     CompositionLocalProvider(
         LocalThemeIsDark provides isDarkState
     ) {
         val isDark by isDarkState
-        SystemAppearance(!isDark)
+//        SystemAppearance(!isDark)
+        if (isDark){
+            PlatformColors(
+                surfaceBrightDark,
+                surfaceBrightDark
+            )
+        }else {
+            PlatformColors(
+                surfaceBrightLight,
+                surfaceBrightLight
+            )
+        }
         MaterialTheme(
             colorScheme = if (isDark) darkScheme else lightScheme,
             content = { Surface(content = content) }

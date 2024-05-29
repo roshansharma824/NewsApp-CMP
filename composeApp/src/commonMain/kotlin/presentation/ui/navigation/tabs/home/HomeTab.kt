@@ -10,11 +10,12 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import presentation.ui.screens.home.HomeScreen
 
 object HomeTab: Tab {
     @Composable
     override fun Content() {
-//       Navigator(HomeScreen())
+       Navigator(HomeScreen())
     }
 
     override val options: TabOptions
