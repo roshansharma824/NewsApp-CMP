@@ -1,6 +1,7 @@
 package presentation.ui.components
 
 import Utils.calculateTimeDifferenceInHoursAndMinutes
+import Utils.formatDateString
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
@@ -21,13 +22,17 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import domain.model.Result
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
+import presentation.ui.screens.detail.DetailScreen
 
 @Composable
 fun NewsCard(item: Result) {
     val imageUrl = item.multimedia?.getOrNull(0)?.url?.let { asyncPainterResource(it) }
+    val navigator = LocalNavigator.currentOrThrow
 
     imageUrl?.let {
         Card(
@@ -41,7 +46,10 @@ fun NewsCard(item: Result) {
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 8.dp
             ),
-            shape = RoundedCornerShape(12.dp)
+            shape = RoundedCornerShape(12.dp),
+            onClick = {
+                navigator.push(DetailScreen(item))
+            }
         ) {
             Column(
                 modifier = Modifier
@@ -51,8 +59,7 @@ fun NewsCard(item: Result) {
                     resource = imageUrl,
                     contentDescription = null,
                     modifier = Modifier.fillMaxWidth()
-                        .height(200.dp)
-                    ,
+                        .height(200.dp),
                     contentScale = ContentScale.Crop,
                     animationSpec = tween(
                         durationMillis = 200,
@@ -68,7 +75,10 @@ fun NewsCard(item: Result) {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "${item.title}",
-                        style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                        style = MaterialTheme.typography.headlineSmall.copy(
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary
+                        )
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
@@ -84,7 +94,13 @@ fun NewsCard(item: Result) {
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = "Published ${item.published_date?.let { calculateTimeDifferenceInHoursAndMinutes(it) }} ago",
+                        text = "Published ${
+                            item.published_date?.let {
+                                formatDateString(
+                                    it
+                                )
+                            }
+                        }",
                         style = MaterialTheme.typography.bodySmall.copy(color = Color.Gray),
                         fontSize = 12.sp
                     )

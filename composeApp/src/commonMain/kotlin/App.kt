@@ -114,7 +114,7 @@ fun AppContent() {
                 if (!showNavigationRail) {
                     BottomNavigation(
                         modifier = Modifier.fillMaxWidth().windowInsetsPadding(WindowInsets.ime),
-                        backgroundColor = androidx.compose.material3.MaterialTheme.colorScheme.background,
+                        backgroundColor = MaterialTheme.colorScheme.background,
                         contentColor = contentColorFor(Color.Red),
                         elevation = 8.dp
                     ) {
@@ -159,7 +159,7 @@ fun AppContent() {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(androidx.compose.material3.MaterialTheme.colorScheme.background)
+                            .background(MaterialTheme.colorScheme.background)
                     ) {
                         TabNavigator(Search)
                     }
@@ -169,7 +169,7 @@ fun AppContent() {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(androidx.compose.material3.MaterialTheme.colorScheme.background)
+                            .background(MaterialTheme.colorScheme.background)
                     ) {
                         TabNavigator(FavouriteTab)
                     }
@@ -179,7 +179,7 @@ fun AppContent() {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(androidx.compose.material3.MaterialTheme.colorScheme.background)
+                            .background(MaterialTheme.colorScheme.background)
                     ) {
                         TabNavigator(ProfileTab)
                     }

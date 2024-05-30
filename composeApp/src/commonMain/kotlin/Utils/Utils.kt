@@ -33,6 +33,22 @@ fun calculateTimeDifference(dateString: String): String {
     return "$years years, $months months, $days days, $hours hours, $minutes minutes, $seconds seconds"
 }
 
+fun formatDateString(dateString: String): String {
+    // Parse the input date string to an Instant
+    val inputDate = Instant.parse(dateString)
+
+    // Convert the instant to LocalDateTime in the system time zone
+    val systemTimeZone = TimeZone.currentSystemDefault()
+    val inputDateTime = inputDate.toLocalDateTime(systemTimeZone)
+
+    // Get the day, month name, and year
+    val day = inputDateTime.dayOfMonth
+    val monthName = inputDateTime.month.name.lowercase().replaceFirstChar { it.uppercase() }.substring(0, 3)
+    val year = inputDateTime.year
+
+    return "$day $monthName $year"
+}
+
 
 fun calculateTimeDifferenceInHoursAndMinutes(dateString: String): String {
     // Parse the input date string to an Instant
@@ -47,6 +63,14 @@ fun calculateTimeDifferenceInHoursAndMinutes(dateString: String): String {
     val remainingMinutes = (duration - hoursDifference.hours).inWholeMinutes
 
     return "$hoursDifference:$remainingMinutes"
+}
+
+fun String.toCapitalize(): String {
+    return if (this.isNotEmpty()) {
+        this[0].uppercaseChar() + this.substring(1).lowercase()
+    } else {
+        this
+    }
 }
 
 
