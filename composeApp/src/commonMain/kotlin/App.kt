@@ -27,6 +27,7 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Scaffold
@@ -60,6 +61,7 @@ import theme.LocalThemeIsDark
 import theme.onSurfaceVariantDark
 import theme.onSurfaceVariantLight
 import theme.primaryLight
+import theme.scrimDark
 import theme.secondaryLight
 import theme.surfaceBrightDark
 import theme.surfaceBrightLight
@@ -194,7 +196,7 @@ fun RowScope.TabItem(tab: Tab) {
     val tabNavigator = LocalTabNavigator.current
     NavigationBarItem(
         modifier = Modifier.fillMaxWidth()
-            .background(if (isDark) surfaceBrightDark else surfaceBrightLight)
+            .background(MaterialTheme.colorScheme.surfaceContainerLowest)
             .height(58.dp).clip(RoundedCornerShape(16.dp)),
         selected = tabNavigator.current == tab,
         onClick = {
