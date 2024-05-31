@@ -112,7 +112,12 @@ data class DetailScreen(val result: Result) : Screen {
                     .fillMaxSize()
                     .padding(paddingValues)
                     .verticalScroll(scrollState)
-                    .padding(16.dp)
+                    .padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 16.dp,
+                        bottom = 58.dp
+                    )
             ) {
                 KamelImage(
                     resource = imageUrl,
