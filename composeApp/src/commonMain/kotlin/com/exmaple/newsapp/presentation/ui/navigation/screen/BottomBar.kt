@@ -54,7 +54,7 @@ fun BottomBar(
 
         Row(
             modifier = Modifier
-                .background(color = MaterialTheme.colorScheme.surfaceContainerLowest, shape = RectangleShape)
+                .background(color = MaterialTheme.colorScheme.surfaceContainerLowest)
                 .fillMaxHeight(0.08f)
                 .fillMaxWidth(),
 

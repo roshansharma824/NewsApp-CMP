@@ -7,6 +7,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -20,11 +21,7 @@ fun MainScreen(
 ) {
     Scaffold(
         bottomBar = {
-            Surface(
-                shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
-            ) {
-                BottomBar(navController = navController)
-            }
+            BottomBar(navController = navController)
         },
     ) {
         Column(
