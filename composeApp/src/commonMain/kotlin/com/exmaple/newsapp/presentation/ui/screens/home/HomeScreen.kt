@@ -42,6 +42,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) 
             refreshing = false
         }
     }
+    val isLoading = remember { mutableStateOf(true) }
 
 //    val refreshState = rememberPullRefreshState(refreshing, ::refresh)
 
@@ -53,15 +54,18 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) 
 
     when (state) {
         is ResultState.Error -> {
+            isLoading.value = false
             val error = (state as ResultState.Error).error
             ErrorBox(error)
         }
 
         is ResultState.Loading -> {
+            isLoading.value = true
             LoadingBox()
         }
 
         is ResultState.Success -> {
+            isLoading.value = false
             val response = (state as ResultState.Success).response
             newsData = response
         }
@@ -95,24 +99,29 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) 
 //                .pullRefresh(refreshState),
         ) {
 
-            LazyColumn(
-                modifier = Modifier.fillMaxWidth().padding(
-                    top = it.calculateTopPadding(),
-                    bottom = 0.dp,
-                    start = 8.dp,
-                    end = 8.dp
-                ),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(0.dp)
-            ) {
-                newsData?.results?.forEach { item ->
-                    item {
-                        NewsCard(item, onItemClick = {
+            if (isLoading.value){
+                LoadingBox()
+            }else {
+                LazyColumn(
+                    modifier = Modifier.fillMaxWidth().padding(
+                        top = it.calculateTopPadding(),
+                        bottom = 0.dp,
+                        start = 8.dp,
+                        end = 8.dp
+                    ),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(0.dp)
+                ) {
+                    newsData?.results?.forEach { item ->
+                        item {
+                            NewsCard(item, onItemClick = {
 //                            navController.navigate("news_details/${item}")
-                        })
+                            })
+                        }
                     }
                 }
             }
+
 
         }
     }

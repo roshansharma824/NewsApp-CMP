@@ -82,6 +82,7 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             implementation(libs.multiplatformSettings)
             implementation(libs.navigation.compose)
+            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
             implementation(libs.composeImageLoader)
             implementation(libs.kamel.image)
             implementation(libs.screen.size)
