@@ -5,7 +5,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Badge
@@ -32,6 +35,7 @@ import com.exmaple.newsapp.theme.secondaryLight
 @Composable
 fun NavigationSideBar(
     navController: NavController,
+    onClickMenu: () -> Unit
 ) {
     var isTitleVisible by remember { mutableStateOf(false) }
     val navigationItems = listOf(
@@ -50,66 +54,52 @@ fun NavigationSideBar(
             header = {
                 IconButton(onClick = {
                     isTitleVisible = !isTitleVisible
-                }) {
+                    onClickMenu.invoke()
+                },
+                    modifier = Modifier.align(Alignment.Start).padding(16.dp)) {
                     Icon(imageVector = Icons.Default.Menu, contentDescription = "Menu")
                 }
             },
         ) {
             Column(
-                modifier = Modifier.fillMaxHeight(),
+                modifier = Modifier.fillMaxHeight().width(if (isTitleVisible) 200.dp else 80.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically)
             ) {
                 navigationItems.forEachIndexed { index, item ->
-                    NavigationRailItem(
-                        selected = currentRoute == item.route,
-                        onClick = {
-                            navController.navigate(item.route) {
-                                navController.graph.startDestinationRoute?.let { screen_route ->
-                                    popUpTo(screen_route) { saveState = true }
+                    Row(
+                        modifier = Modifier.padding(horizontal = 16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        NavigationRailItem(
+                            selected = currentRoute == item.route,
+                            onClick = {
+                                navController.navigate(item.route) {
+                                    navController.graph.startDestinationRoute?.let { screen_route ->
+                                        popUpTo(screen_route) { saveState = true }
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
                                 }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        },
-                        icon = {
-                            Icon(
-                                imageVector = item.icon,
-                                contentDescription = item.title,
-                                tint = if (currentRoute == item.route) primaryLight else if (isDark) secondaryLight else onSurfaceVariantLight
-                            )
-                        },
-                        label = {
-                            AnimatedVisibility(isTitleVisible) {
-                                Text(
-                                    text = item.title,
-                                    fontSize = MaterialTheme.typography.bodySmall.fontSize
+                            },
+                            icon = {
+                                Icon(
+                                    imageVector = item.icon,
+                                    contentDescription = item.title,
+                                    tint = if (currentRoute == item.route) primaryLight else if (isDark) secondaryLight else onSurfaceVariantLight
                                 )
-                            }
-                        },
-                    )
+                            },
+                        )
+                        AnimatedVisibility(isTitleVisible) {
+                            Text(
+                                text = item.title,
+                                fontSize = MaterialTheme.typography.bodyLarge.fontSize
+                            )
+                        }
+                    }
+
                 }
             }
         }
     }
 
 }
-
-//@Composable
-//fun NavigationIcon(
-//    item: BottomNavItemScreen, selected: Boolean,
-//) {
-//    BadgedBox(badge = {
-//        if (item.badgeCount != null) {
-//            Badge {
-//                Text(text = item.badgeCount.toString())
-//            }
-//        } else if (item.hasNews) {
-//            Badge()
-//        }
-//    }) {
-//        Icon(
-//            imageVector = if (selected) item.selectedIcon else item.unselectedIcon,
-//            contentDescription = item.title
-//        )
-//    }
-//}

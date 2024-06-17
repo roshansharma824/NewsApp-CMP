@@ -12,6 +12,10 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
@@ -29,6 +33,11 @@ fun MainScreen(
 ) {
     val windowClass = calculateWindowSizeClass()
     val showNavigationRail = windowClass.widthSizeClass != WindowWidthSizeClass.Compact
+    var isTitleVisible by remember { mutableStateOf(false) }
+    var width = 80.dp
+    if (isTitleVisible) {
+        width = 200.dp
+    }
     Scaffold(
         bottomBar = {
             if (!showNavigationRail) {
@@ -41,14 +50,14 @@ fun MainScreen(
                 .navigationBarsPadding()
                 .padding(
                     top = it.calculateTopPadding(),
-                    start = if (showNavigationRail) 80.dp else 0.dp
+                    start = if (showNavigationRail) width else 0.dp
                 )
         ) {
             MainNavGraph(navController = navController)
         }
     }
     if (showNavigationRail) {
-        NavigationSideBar(navController = navController)
+        NavigationSideBar(navController = navController, onClickMenu = { isTitleVisible = !isTitleVisible })
     }
 
 
