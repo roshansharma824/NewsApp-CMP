@@ -23,15 +23,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import coil3.compose.rememberAsyncImagePainter
 import com.exmaple.newsapp.domain.model.Article
 import com.exmaple.newsapp.openUrl
 import com.exmaple.newsapp.utils.formatDateString
+import com.seiko.imageloader.rememberImagePainter
+import news_app.composeapp.generated.resources.Res
+import news_app.composeapp.generated.resources.avatar
+import news_app.composeapp.generated.resources.error_404
+import news_app.composeapp.generated.resources.ic_cyclone
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun NewsCard(item: Article) {
@@ -74,7 +82,8 @@ fun NewsCard(item: Article) {
                     .height(200.dp)
                     .run { if (isAnimate) rotate(rotate) else this },
                 model = item.urlToImage,
-                contentDescription = null
+                contentDescription = item.description,
+                error = painterResource(Res.drawable.error_404),
             )
             Column(
                 modifier = Modifier

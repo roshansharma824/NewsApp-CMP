@@ -30,7 +30,6 @@ fun MainScreen(
     val windowClass = calculateWindowSizeClass()
     val showNavigationRail = windowClass.widthSizeClass != WindowWidthSizeClass.Compact
     Scaffold(
-//        modifier = Modifier.fillMaxWidth(),
         bottomBar = {
             if (!showNavigationRail) {
                 BottomBar(navController = navController)

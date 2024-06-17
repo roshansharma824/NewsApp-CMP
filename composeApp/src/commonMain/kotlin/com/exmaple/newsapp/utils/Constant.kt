@@ -87,7 +87,7 @@ object Constant {
             "      \"title\": \"Voyager 1 is back! 46-year-old NASA spacecraft sends signal after going dark for months - The Indian Express\",\n" +
             "      \"description\": null,\n" +
             "      \"url\": \"https://indianexpress.com/article/technology/science/voyager-1-is-back-46-year-old-nasa-spacecraft-sends-signal-after-going-dark-for-months-9394333/\",\n" +
-            "      \"urlToImage\": null,\n" +
+            "      \"urlToImage\": \"https://images.indianexpress.com/2024/06/Nasa.jpg\",\n" +
             "      \"publishedAt\": \"2024-06-15T09:01:35Z\",\n" +
             "      \"content\": null\n" +
             "    },\n" +
@@ -159,19 +159,6 @@ object Constant {
             "    {\n" +
             "      \"source\": {\n" +
             "        \"id\": null,\n" +
-            "        \"name\": \"Hindustan Times\"\n" +
-            "      },\n" +
-            "      \"author\": \"Khushi Pal\",\n" +
-            "      \"title\": \"10 must-see images of space captured by NASA’s Hubble Space Telescope - Hindustan Times\",\n" +
-            "      \"description\": \"Check out ten stunning images of space captured by NASA's Hubble Space Telescope.\",\n" +
-            "      \"url\": \"https://www.hindustantimes.com/web-stories/in-focus/10-must-see-images-of-space-captured-by-nasa-s-hubble-space-telescope-101718434942643.html\",\n" +
-            "      \"urlToImage\": null,\n" +
-            "      \"publishedAt\": \"2024-06-15T07:32:56Z\",\n" +
-            "      \"content\": \"By Khushi PalPublished Jun 15, 2024\\r\\nHindustan TimesIn FocusPhoto Credits: Instagram/nasahubble\"\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"source\": {\n" +
-            "        \"id\": null,\n" +
             "        \"name\": \"Crictracker.com\"\n" +
             "      },\n" +
             "      \"author\": \"Koustav Sengupta\",\n" +
@@ -191,7 +178,7 @@ object Constant {
             "      \"title\": \"8 Naxalites, one security officer killed in encounter in Chhattisgarh - The Hindu\",\n" +
             "      \"description\": null,\n" +
             "      \"url\": \"https://www.thehindu.com/news/national/encounter-breaks-out-between-security-personnel-and-naxalites-in-chhattisgarh/article68292553.ece\",\n" +
-            "      \"urlToImage\": null,\n" +
+            "      \"urlToImage\": \"https://th-i.thgim.com/public/incoming/vyp4rq/article68294624.ece/alternates/FREE_1200/PTI06_15_2024_000308B.jpg\",\n" +
             "      \"publishedAt\": \"2024-06-15T06:52:00Z\",\n" +
             "      \"content\": null\n" +
             "    },\n" +
@@ -243,7 +230,7 @@ object Constant {
             "      \"title\": \"G7 Summit commits to promoting India-Middle East-Europe Economic Corridor - The Hindu\",\n" +
             "      \"description\": null,\n" +
             "      \"url\": \"https://www.thehindu.com/news/international/g7-summit-commits-to-promoting-india-middle-east-europe-economic-corridor/article68292418.ece\",\n" +
-            "      \"urlToImage\": null,\n" +
+            "      \"urlToImage\": \"https://th-i.thgim.com/public/incoming/eh4efa/article68292433.ece/alternates/LANDSCAPE_1200/AFP_34WR23X.jpg\",\n" +
             "      \"publishedAt\": \"2024-06-15T05:06:06Z\",\n" +
             "      \"content\": null\n" +
             "    },\n" +
