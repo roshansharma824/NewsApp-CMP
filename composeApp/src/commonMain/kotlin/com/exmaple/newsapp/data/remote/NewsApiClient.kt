@@ -43,6 +43,7 @@ object NewsApiClient {
 
     suspend fun getTopStories(section: String = "science"): NewsData {
 //        val url = "$BASE_URL/top-headlines?country=in&apiKey=9c4ae54511e24ae4b188141138e91f23"
+//        return client.get(url).body()
         return newsData
     }
 }
