@@ -14,6 +14,7 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.get
 import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
 
 object NewsApiClient {
@@ -44,6 +45,7 @@ object NewsApiClient {
     suspend fun getTopStories(section: String = "science"): NewsData {
 //        val url = "$BASE_URL/top-headlines?country=in&apiKey=9c4ae54511e24ae4b188141138e91f23"
 //        return client.get(url).body()
+        delay(2000)
         return newsData
     }
 }

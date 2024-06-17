@@ -3,12 +3,15 @@ package com.exmaple.newsapp.presentation.ui.navigation.screen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Badge
@@ -51,12 +54,15 @@ fun NavigationSideBar(
 
     if (bottomBarDestination) {
         NavigationRail(
+            modifier = Modifier.background(color = MaterialTheme.colorScheme.surfaceContainerLowest),
+            containerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
             header = {
                 IconButton(onClick = {
                     isTitleVisible = !isTitleVisible
                     onClickMenu.invoke()
                 },
-                    modifier = Modifier.align(Alignment.Start).padding(16.dp)) {
+                    modifier = Modifier.align(Alignment.Start).padding(16.dp)
+                ) {
                     Icon(imageVector = Icons.Default.Menu, contentDescription = "Menu")
                 }
             },
@@ -67,11 +73,13 @@ fun NavigationSideBar(
             ) {
                 navigationItems.forEachIndexed { index, item ->
                     Row(
-                        modifier = Modifier.padding(horizontal = 16.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                            .fillMaxWidth()
+                            .background(color = if (currentRoute == item.route) MaterialTheme.colorScheme.surfaceContainer else MaterialTheme.colorScheme.surfaceContainerLowest, shape = RoundedCornerShape(10.dp)),
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         NavigationRailItem(
-                            selected = currentRoute == item.route,
+                            selected = false,
                             onClick = {
                                 navController.navigate(item.route) {
                                     navController.graph.startDestinationRoute?.let { screen_route ->
@@ -88,11 +96,21 @@ fun NavigationSideBar(
                                     tint = if (currentRoute == item.route) primaryLight else if (isDark) secondaryLight else onSurfaceVariantLight
                                 )
                             },
+                            label = {
+                                AnimatedVisibility(!isTitleVisible) {
+                                    Text(
+                                        text = item.title,
+                                        fontSize = MaterialTheme.typography.labelSmall.fontSize,
+                                        color = if (currentRoute == item.route) primaryLight else if (isDark) secondaryLight else onSurfaceVariantLight
+                                    )
+                                }
+                            }
                         )
                         AnimatedVisibility(isTitleVisible) {
                             Text(
                                 text = item.title,
-                                fontSize = MaterialTheme.typography.bodyLarge.fontSize
+                                fontSize = MaterialTheme.typography.bodyLarge.fontSize,
+                                color = if (currentRoute == item.route) primaryLight else if (isDark) secondaryLight else onSurfaceVariantLight
                             )
                         }
                     }
