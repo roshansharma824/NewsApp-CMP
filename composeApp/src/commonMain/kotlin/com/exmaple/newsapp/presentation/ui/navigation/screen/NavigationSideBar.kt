@@ -110,7 +110,8 @@ fun NavigationSideBar(
                             Text(
                                 text = item.title,
                                 fontSize = MaterialTheme.typography.bodyLarge.fontSize,
-                                color = if (currentRoute == item.route) primaryLight else if (isDark) secondaryLight else onSurfaceVariantLight
+                                color = if (currentRoute == item.route) primaryLight else if (isDark) secondaryLight else onSurfaceVariantLight,
+                                modifier = Modifier.padding(bottom = 4.dp)
                             )
                         }
                     }

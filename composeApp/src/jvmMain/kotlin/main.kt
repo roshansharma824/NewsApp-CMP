@@ -13,7 +13,7 @@ fun main() = application {
     }
     Window(
         title = "News App",
-        state = rememberWindowState(width = 800.dp, height = 600.dp),
+        state = rememberWindowState(width = 500.dp, height = 1200.dp),
         onCloseRequest = ::exitApplication,
     ) {
         window.minimumSize = Dimension(350, 600)
