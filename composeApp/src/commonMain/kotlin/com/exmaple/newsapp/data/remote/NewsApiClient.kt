@@ -1,8 +1,9 @@
 package com.exmaple.newsapp.data.remote
 
+import com.exmaple.newsapp.domain.model.NewsData
 import com.exmaple.newsapp.utils.Constant.BASE_URL
 import com.exmaple.newsapp.utils.Constant.TIME_OUT
-import com.exmaple.newsapp.domain.model.NewsData
+import com.exmaple.newsapp.utils.Constant.newsData
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.HttpTimeout
@@ -41,7 +42,7 @@ object NewsApiClient {
     }
 
     suspend fun getTopStories(section: String = "science"): NewsData {
-        val url = "$BASE_URL$section.json?api-key=qVoRM0ff9ocfItcgyGvCoToHHWEqiDtD"
-        return client.get(url).body()
+//        val url = "$BASE_URL/top-headlines?country=in&apiKey=9c4ae54511e24ae4b188141138e91f23"
+        return newsData
     }
 }

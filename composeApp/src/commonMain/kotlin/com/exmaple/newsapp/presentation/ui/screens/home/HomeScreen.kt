@@ -5,7 +5,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -29,6 +33,7 @@ import com.exmaple.newsapp.presentation.ui.components.TopAppBarWithProfile
 import com.exmaple.newsapp.presentation.viewmodels.MainViewModel
 
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) {
 
@@ -45,6 +50,9 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) 
     val isLoading = remember { mutableStateOf(true) }
 
 //    val refreshState = rememberPullRefreshState(refreshing, ::refresh)
+
+    val windowClass = calculateWindowSizeClass()
+    val showNavigationRail = windowClass.widthSizeClass != WindowWidthSizeClass.Compact
 
 
     LaunchedEffect(Unit) {
@@ -102,24 +110,46 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) 
             if (isLoading.value){
                 LoadingBox()
             }else {
-                LazyColumn(
-                    modifier = Modifier.fillMaxWidth().padding(
-                        top = it.calculateTopPadding(),
-                        bottom = 0.dp,
-                        start = 8.dp,
-                        end = 8.dp
-                    ),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(0.dp)
-                ) {
-                    newsData?.results?.forEach { item ->
-                        item {
-                            NewsCard(item, onItemClick = {
+                if (false){
+                    LazyRow(
+                        modifier = Modifier.fillMaxWidth().padding(
+                            top = it.calculateTopPadding(),
+                            bottom = 0.dp,
+                            start = 8.dp,
+                            end = 8.dp
+                        ),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(0.dp)
+                    ){
+                        newsData?.articles?.forEach { item ->
+                            item {
+                                NewsCard(item, onItemClick = {
 //                            navController.navigate("news_details/${item}")
-                            })
+                                })
+                            }
+                        }
+                    }
+                }else{
+                    LazyColumn(
+                        modifier = Modifier.fillMaxWidth().padding(
+                            top = it.calculateTopPadding(),
+                            bottom = 0.dp,
+                            start = 8.dp,
+                            end = 8.dp
+                        ),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(0.dp)
+                    ) {
+                        newsData?.articles?.forEach { item ->
+                            item {
+                                NewsCard(item, onItemClick = {
+//                            navController.navigate("news_details/${item}")
+                                })
+                            }
                         }
                     }
                 }
+
             }
 
 
