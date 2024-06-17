@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
@@ -110,16 +112,15 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) 
             if (isLoading.value){
                 LoadingBox()
             }else {
-                if (false){
-                    LazyRow(
+                if (showNavigationRail){
+                    LazyVerticalGrid(
                         modifier = Modifier.fillMaxWidth().padding(
                             top = it.calculateTopPadding(),
                             bottom = 0.dp,
                             start = 8.dp,
                             end = 8.dp
                         ),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(0.dp)
+                        columns = GridCells.Adaptive(minSize = 400.dp)
                     ){
                         newsData?.articles?.forEach { item ->
                             item {
