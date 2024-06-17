@@ -124,9 +124,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) 
                     ){
                         newsData?.articles?.forEach { item ->
                             item {
-                                NewsCard(item, onItemClick = {
-//                            navController.navigate("news_details/${item}")
-                                })
+                                NewsCard(item)
                             }
                         }
                     }
@@ -143,9 +141,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) 
                     ) {
                         newsData?.articles?.forEach { item ->
                             item {
-                                NewsCard(item, onItemClick = {
-//                            navController.navigate("news_details/${item}")
-                                })
+                                NewsCard(item)
                             }
                         }
                     }

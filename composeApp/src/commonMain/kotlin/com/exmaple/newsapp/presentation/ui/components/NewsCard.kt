@@ -34,7 +34,7 @@ import com.exmaple.newsapp.openUrl
 import com.exmaple.newsapp.utils.formatDateString
 
 @Composable
-fun NewsCard(item: Article, onItemClick: () -> Unit) {
+fun NewsCard(item: Article) {
 
     val isAnimate by remember { mutableStateOf(false) }
     val transition = rememberInfiniteTransition()
@@ -60,8 +60,6 @@ fun NewsCard(item: Article, onItemClick: () -> Unit) {
         ),
         shape = RoundedCornerShape(12.dp),
         onClick = {
-            onItemClick.invoke()
-//                navigator.push(DetailScreen(item))
             openUrl(item.url)
         }
     ) {
