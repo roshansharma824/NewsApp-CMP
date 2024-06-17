@@ -31,7 +31,11 @@ fun calculateTimeDifference(dateString: String): String {
     return "$years years, $months months, $days days, $hours hours, $minutes minutes, $seconds seconds"
 }
 
-fun formatDateString(dateString: String): String {
+fun formatDateString(dateString: String?): String {
+    if (dateString == null) {
+        return ""
+    }
+
     // Parse the input date string to an Instant
     val inputDate = Instant.parse(dateString)
 

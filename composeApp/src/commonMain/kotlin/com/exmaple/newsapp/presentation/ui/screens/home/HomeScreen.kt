@@ -32,6 +32,7 @@ import com.exmaple.newsapp.presentation.ui.components.ErrorBox
 import com.exmaple.newsapp.presentation.ui.components.LoadingBox
 import com.exmaple.newsapp.presentation.ui.components.NewsCard
 import com.exmaple.newsapp.presentation.ui.components.TopAppBarWithProfile
+import com.exmaple.newsapp.presentation.ui.navigation.screen.BottomNavItemScreen
 import com.exmaple.newsapp.presentation.viewmodels.MainViewModel
 
 
@@ -41,14 +42,15 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) 
 
     val viewModel: MainViewModel = koinInject()
     var newsData by remember { mutableStateOf<NewsData?>(null) }
-    val refreshScope = rememberCoroutineScope()
-    var refreshing by remember { mutableStateOf(false) }
-    fun refresh() {
-        refreshScope.launch {
-            viewModel.getNewsData()
-            refreshing = false
-        }
-    }
+//    val refreshScope = rememberCoroutineScope()
+//    var refreshing by remember { mutableStateOf(false) }
+//    fun refresh() {
+//        refreshScope.launch {
+//            viewModel.getNewsData()
+//            refreshing = false
+//        }
+//    }
+
     val isLoading = remember { mutableStateOf(true) }
 
 //    val refreshState = rememberPullRefreshState(refreshing, ::refresh)
@@ -87,19 +89,10 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) 
             TopAppBarWithProfile(
                 name = "Roshan",
                 onCartClicked = {
-//                        cartItemList?.let { carts ->
-//                            val mutableCartsList = carts.toMutableList()
-//                            navigator?.push(CartList(mutableCartsList))
-//                        }
                 },
                 profileImageUrl = "",
                 itemCount = 0,
                 onProfileClick = {
-//                        if (user?.user?.email?.isEmpty() == true) {
-//                            navigator?.push(LoginScreen())
-//                        } else {
-//                            isProfile = !isProfile
-//                        }
                 }
             )
         }
@@ -109,10 +102,10 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) 
 //                .pullRefresh(refreshState),
         ) {
 
-            if (isLoading.value){
+            if (isLoading.value) {
                 LoadingBox()
-            }else {
-                if (showNavigationRail){
+            } else {
+                if (showNavigationRail) {
                     LazyVerticalGrid(
                         modifier = Modifier.fillMaxWidth().padding(
                             top = it.calculateTopPadding(),
@@ -121,14 +114,16 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) 
                             end = 8.dp
                         ),
                         columns = GridCells.Adaptive(minSize = 400.dp)
-                    ){
-                        newsData?.articles?.forEach { item ->
+                    ) {
+                        newsData?.articles?.forEachIndexed { index, article ->
                             item {
-                                NewsCard(item)
+                                NewsCard(article, index, onItemClicked = {
+                                    navController.navigate(BottomNavItemScreen.Detail.passDataId(dataId = it))
+                                })
                             }
                         }
                     }
-                }else{
+                } else {
                     LazyColumn(
                         modifier = Modifier.fillMaxWidth().padding(
                             top = it.calculateTopPadding(),
@@ -139,9 +134,11 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController) 
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(0.dp)
                     ) {
-                        newsData?.articles?.forEach { item ->
+                        newsData?.articles?.forEachIndexed { index, article ->
                             item {
-                                NewsCard(item)
+                                NewsCard(article, index, onItemClicked = {
+                                    navController.navigate(BottomNavItemScreen.Detail.passDataId(dataId = it))
+                                })
                             }
                         }
                     }

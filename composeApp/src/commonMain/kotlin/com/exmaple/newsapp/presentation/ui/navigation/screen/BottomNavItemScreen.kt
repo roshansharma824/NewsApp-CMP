@@ -15,7 +15,7 @@ sealed class BottomNavItemScreen(val route: String, val icon: ImageVector, val t
     data object Profile : BottomNavItemScreen("profile_screen", Icons.Outlined.Person, "Profile")
 
     data object Detail : BottomNavItemScreen("detail_screen/{dataId}", Icons.Outlined.Favorite, "Detail") {
-        fun passDataId(dataId: String): String = "detail_screen/${dataId}"
+        fun passDataId(dataId: Int): String = "detail_screen/${dataId}"
     }
 
 //    data object EditNote:Screen("edit_note_screen/{${NOTE_ARGUMENT_KEY}}"){

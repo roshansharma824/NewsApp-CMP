@@ -34,9 +34,9 @@ fun MainNavGraph(navController: NavHostController) {
             ProfileScreen()
         }
         composable(route = BottomNavItemScreen.Detail.route, arguments = listOf(navArgument("dataId") {
-            type = NavType.StringType
+            type = NavType.IntType
         })) {backStackEntry ->
-            val dataId = backStackEntry.arguments?.getString("dataId", "-1")
+            val dataId = backStackEntry.arguments?.getInt("dataId", -1)
             if (dataId != null) {
                 DetailScreen(navController = navController,dataId = dataId)
             }

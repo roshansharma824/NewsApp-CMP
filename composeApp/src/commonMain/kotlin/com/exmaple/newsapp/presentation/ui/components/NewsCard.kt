@@ -42,7 +42,7 @@ import news_app.composeapp.generated.resources.ic_cyclone
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun NewsCard(item: Article) {
+fun NewsCard(item: Article, index: Int, onItemClicked: (Int) -> Unit) {
 
     val isAnimate by remember { mutableStateOf(false) }
     val transition = rememberInfiniteTransition()
@@ -68,7 +68,8 @@ fun NewsCard(item: Article) {
         ),
         shape = RoundedCornerShape(12.dp),
         onClick = {
-            openUrl(item.url)
+//            openUrl(item.url)
+            onItemClicked.invoke(index)
         }
     ) {
         Column(
