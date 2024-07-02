@@ -6,5 +6,5 @@ import org.koin.core.annotation.Single
 @Single
 interface NewsApi {
 
-    suspend fun getTopStories(): NewsData
+    suspend fun getTopStories(category: String): NewsData
 }

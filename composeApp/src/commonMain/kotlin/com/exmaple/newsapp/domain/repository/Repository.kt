@@ -5,7 +5,7 @@ import com.exmaple.newsapp.data.repository.NewsApi
 import com.exmaple.newsapp.domain.model.NewsData
 
 class Repository : NewsApi {
-    override suspend fun getTopStories(): NewsData {
-        return NewsApiClient.getTopStories()
+    override suspend fun getTopStories(category: String): NewsData {
+        return NewsApiClient.getTopStories(category)
     }
 }

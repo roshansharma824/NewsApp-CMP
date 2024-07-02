@@ -25,11 +25,11 @@ class MainViewModel(
     private val _article= MutableStateFlow<ResultState<Article>>(ResultState.Loading)
     val article: StateFlow<ResultState<Article>> = _article.asStateFlow()
 
-    fun getNewsData() {
+    fun getNewsData(category: String = "") {
         viewModelScope.launch {
             _newsData.value = ResultState.Loading
             try {
-                val response = repository.getTopStories()
+                val response = repository.getTopStories(category)
                 _newsData.value = ResultState.Success(response)
             } catch (e: Exception) {
                 _newsData.value = ResultState.Error(e)
