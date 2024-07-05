@@ -1,6 +1,7 @@
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import com.android.build.api.dsl.ManagedVirtualDevice
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
@@ -188,4 +189,7 @@ compose.experimental {
 buildConfig {
     // BuildConfig configuration here.
     // https://github.com/gmazzo/gradle-buildconfig-plugin#usage-in-kts
+    val API_SECRET: String = gradleLocalProperties(rootDir).getProperty("API_SECRET")
+    buildConfigField("APP_NAME", project.name)
+    buildConfigField("API_SECRET", API_SECRET)
 }

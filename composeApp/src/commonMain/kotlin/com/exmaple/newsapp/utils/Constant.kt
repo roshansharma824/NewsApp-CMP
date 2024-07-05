@@ -1,11 +1,13 @@
 package com.exmaple.newsapp.utils
 
+import News_App.composeApp.BuildConfig
 import com.exmaple.newsapp.domain.model.NewsData
 import kotlinx.serialization.json.Json
 
 object Constant {
     const val BASE_URL = "https://newsapi.org/v2"
     const val TIME_OUT = 30000L
+    const val API_SECRET = BuildConfig.API_SECRET
 
     const val jsonString: String = "{\n" +
             "  \"status\": \"ok\",\n" +

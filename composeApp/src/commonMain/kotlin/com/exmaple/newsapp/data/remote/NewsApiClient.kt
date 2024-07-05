@@ -1,6 +1,7 @@
 package com.exmaple.newsapp.data.remote
 
 import com.exmaple.newsapp.domain.model.NewsData
+import com.exmaple.newsapp.utils.Constant.API_SECRET
 import com.exmaple.newsapp.utils.Constant.BASE_URL
 import com.exmaple.newsapp.utils.Constant.TIME_OUT
 import com.exmaple.newsapp.utils.Constant.newsData
@@ -43,7 +44,7 @@ object NewsApiClient {
     }
 
     suspend fun getTopStories(category: String): NewsData {
-        val url = "$BASE_URL/top-headlines?country=in&category=${category}&apiKey=9c4ae54511e24ae4b188141138e91f23"
+        val url = "$BASE_URL/top-headlines?country=in&category=${category}&apiKey=$API_SECRET"
         return client.get(url).body()
 //        delay(2000)
 //        return newsData
