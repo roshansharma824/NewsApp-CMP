@@ -47,6 +47,7 @@ import com.exmaple.newsapp.theme.LocalThemeIsDark
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.text.font.FontWeight
+import com.exmaple.newsapp.theme.primaryLight
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
@@ -199,8 +200,8 @@ fun OptionText(
     onClick: () -> Unit,
 ) {
     val isDark by LocalThemeIsDark.current
-    val backgroundColor = if (isSelected) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent
-    val borderColor = if (isSelected) Color.Transparent else MaterialTheme.colorScheme.secondaryContainer
+    val backgroundColor = if (isSelected) primaryLight else Color.Transparent
+    val borderColor = if (isSelected) Color.Transparent else primaryLight
     val textColor = if (isSelected) Color.White else if (isDark) Color.White else Color.Black
 
     FilledTonalButton(
