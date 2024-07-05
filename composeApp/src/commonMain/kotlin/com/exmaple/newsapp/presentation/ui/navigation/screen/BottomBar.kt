@@ -1,7 +1,10 @@
 package com.exmaple.newsapp.presentation.ui.navigation.screen
 
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Blue
@@ -24,6 +28,7 @@ import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import coil3.compose.AsyncImagePainter.State.Empty.painter
@@ -33,6 +38,7 @@ import com.exmaple.newsapp.theme.primaryLight
 import com.exmaple.newsapp.theme.secondaryLight
 import org.jetbrains.compose.resources.painterResource
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BottomBar(
     modifier: Modifier = Modifier,
@@ -55,19 +61,16 @@ fun BottomBar(
         Row(
             modifier = Modifier
                 .background(color = MaterialTheme.colorScheme.surfaceContainerLowest)
-                .fillMaxHeight(0.08f)
+                .padding(bottom = 18.dp)
                 .fillMaxWidth(),
 
             horizontalArrangement = Arrangement.SpaceAround
         ) {
             navigationItems.forEach { item ->
                 Column(
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    IconButton(
-                        modifier = Modifier
-                            .height(30.dp),
-                        onClick = {
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.clickable{
                         navController.navigate(item.route) {
                             navController.graph.startDestinationRoute?.let { screen_route ->
                                 popUpTo(screen_route) { saveState = true }
@@ -75,19 +78,19 @@ fun BottomBar(
                             launchSingleTop = true
                             restoreState = true
                         }
-                    },) {
-                        Icon(
-                            imageVector = item.icon,
-                            contentDescription = item.title,
-                            tint = if (currentRoute == item.route) primaryLight else if (isDark) secondaryLight else onSurfaceVariantLight
-                        )
-
                     }
+                ) {
+                    Icon(
+                        imageVector = item.icon,
+                        contentDescription = item.title,
+                        tint = if (currentRoute == item.route) primaryLight else if (isDark) secondaryLight else onSurfaceVariantLight
+                    )
 
                     Text(
                         modifier = Modifier.padding(bottom = 8.dp),
                         text = item.title,
                         fontWeight = FontWeight.Normal,
+                        fontSize = 12.sp,
                         color = if (currentRoute == item.route) {
                             primaryLight
                         } else onSurfaceVariantLight
